@@ -1,0 +1,52 @@
+[
+  {
+    "title": "1. Introduccion a C",
+    "description": "Historia, usos y primer programa en C",
+    "content": "<h2>Introduccion a C</h2><p>C es un lenguaje de programacion creado en 1972 por Dennis Ritchie en los Laboratorios Bell. Es la base de muchos lenguajes modernos como C++, Java y Python.</p><h3>Caracteristicas principales:</h3><ul><li>Lenguaje compilado y de proposito general</li><li>Acceso de bajo nivel a la memoria</li><li>Eficiente y rapido</li><li>Ampliamente usado en sistemas operativos, embebidos y videojuegos</li></ul><h3>Primer programa en C:</h3><pre><code>#include &lt;stdio.h&gt;\n\nint main() {\n    printf(\"Hola Mundo!\");\n    return 0;\n}</code></pre><p>Para compilar: <code>gcc programa.c -o programa</code></p><p>Para ejecutar: <code>./programa</code></p>"
+  },
+  {
+    "title": "2. Variables y Tipos de Datos en C",
+    "description": "Tipos de datos, declaracion de variables y constantes",
+    "content": "<h2>Variables y Tipos de Datos en C</h2><h3>Tipos basicos:</h3><table border='1' cellpadding='5' style='color:#d4d4d4;border-color:#555'><tr><th>Tipo</th><th>Tamaño</th><th>Rango</th></tr><tr><td>int</td><td>4 bytes</td><td>-2^31 a 2^31-1</td></tr><tr><td>float</td><td>4 bytes</td><td>±3.4e-38 a ±3.4e38</td></tr><tr><td>double</td><td>8 bytes</td><td>±1.7e-308 a ±1.7e308</td></tr><tr><td>char</td><td>1 byte</td><td>-128 a 127</td></tr></table><h3>Ejemplo:</h3><pre><code>int edad = 25;\nfloat altura = 1.75;\nchar inicial = 'J';\ndouble pi = 3.1415926535;</code></pre>"
+  },
+  {
+    "title": "3. Estructuras de Control en C",
+    "description": "if, else, switch, while, for, do-while",
+    "content": "<h2>Estructuras de Control</h2><h3>Condicionales:</h3><pre><code>if (x > 0) {\n    printf(\"Positivo\");\n} else if (x == 0) {\n    printf(\"Cero\");\n} else {\n    printf(\"Negativo\");\n}</code></pre><h3>Switch:</h3><pre><code>switch(opcion) {\n    case 1: printf(\"Uno\"); break;\n    case 2: printf(\"Dos\"); break;\n    default: printf(\"Otro\");\n}</code></pre><h3>Bucles:</h3><pre><code>for (int i = 0; i < 10; i++)\n    printf(\"%d \", i);\n\nwhile (x > 0) {\n    printf(\"%d \", x);\n    x--;\n}</code></pre>"
+  },
+  {
+    "title": "4. Introduccion a C++",
+    "description": "De C a C++: orientacion a objetos, cout, cin",
+    "content": "<h2>Introduccion a C++</h2><p>C++ fue creado por Bjarne Stroustrup en 1985 como una extension de C con soporte para programacion orientada a objetos.</p><h3>Diferencias clave con C:</h3><ul><li>cout/cin en vez de printf/scanf</li><li>Soporta clases y objetos</li><li>Plantillas (templates)</li><li>Sobrecarga de operadores</li><li>Namespace std</li></ul><h3>Hola Mundo en C++:</h3><pre><code>#include &lt;iostream&gt;\nusing namespace std;\n\nint main() {\n    cout << \"Hola Mundo!\" << endl;\n    return 0;\n}</code></pre>"
+  },
+  {
+    "title": "5. Clases y Objetos en C++",
+    "description": "POO: clases, objetos, encapsulamiento, herencia",
+    "content": "<h2>Clases y Objetos</h2><h3>Definir una clase:</h3><pre><code>class Persona {\nprivate:\n    string nombre;\n    int edad;\n\npublic:\n    Persona(string n, int e) : nombre(n), edad(e) {}\n    \n    void saludar() {\n        cout << \"Hola, soy \" << nombre << endl;\n    }\n};</code></pre><h3>Uso:</h3><pre><code>Persona p1(\"Juan\", 25);\np1.saludar();</code></pre><h3>Herencia:</h3><pre><code>class Estudiante : public Persona {\n    string carrera;\npublic:\n    Estudiante(string n, int e, string c) \n        : Persona(n, e), carrera(c) {}\n};</code></pre>"
+  },
+  {
+    "title": "6. Punteros y Referencias",
+    "description": "Punteros, referencias, memoria dinamica, new/delete",
+    "content": "<h2>Punteros y Referencias</h2><h3>Punteros en C/C++:</h3><pre><code>int x = 10;\nint* ptr = &x;\n*ptr = 20;\nprintf(\"%d\", x);  // 20</code></pre><h3>Memoria dinamica en C:</h3><pre><code>int* arr = (int*)malloc(5 * sizeof(int));\narr[0] = 1;\nfree(arr);</code></pre><h3>Memoria dinamica en C++:</h3><pre><code>int* arr = new int[5];\narr[0] = 1;\ndelete[] arr;</code></pre><h3>Referencias (C++):</h3><pre><code>int x = 10;\nint& ref = x;\nref = 20;\n// x ahora es 20</code></pre>"
+  },
+  {
+    "title": "7. Arrays y Strings",
+    "description": "Arrays, cadenas de caracteres, std::string",
+    "content": "<h2>Arrays y Strings</h2><h3>Arrays en C:</h3><pre><code>int nums[5] = {1, 2, 3, 4, 5};\nchar nombre[] = \"Juan\";\nprintf(\"%s\", nombre);</code></pre><h3>Strings en C++:</h3><pre><code>#include &lt;string&gt;\nstring s1 = \"Hola\";\nstring s2 = \" Mundo\";\nstring s3 = s1 + s2;\ncout << s3.length() << endl;  // 10</code></pre>"
+  },
+  {
+    "title": "8. Funciones y Sobrecarga",
+    "description": "Declaracion, paso por valor/referencia, sobrecarga",
+    "content": "<h2>Funciones</h2><h3>Funcion basica:</h3><pre><code>int suma(int a, int b) {\n    return a + b;\n}</code></pre><h3>Sobrecarga (C++):</h3><pre><code>int suma(int a, int b) { return a + b; }\ndouble suma(double a, double b) { return a + b; }\nint suma(int a, int b, int c) { return a + b + c; }</code></pre><h3>Paso por referencia:</h3><pre><code>void intercambiar(int& a, int& b) {\n    int temp = a;\n    a = b;\n    b = temp;\n}</code></pre>"
+  },
+  {
+    "title": "9. STL: Contenedores",
+    "description": "vector, list, map, set, iteradores",
+    "content": "<h2>STL - Standard Template Library</h2><h3>Vector:</h3><pre><code>#include &lt;vector&gt;\nvector&lt;int&gt; v = {1, 2, 3};\nv.push_back(4);\nfor (int x : v) cout << x;\n</code></pre><h3>Map:</h3><pre><code>#include &lt;map&gt;\nmap&lt;string, int&gt; edades;\nedades[\"Juan\"] = 25;\nedades[\"Ana\"] = 30;\nfor (auto& p : edades)\n    cout << p.first << \": \" << p.second;</code></pre>"
+  },
+  {
+    "title": "10. Archivos y Excepciones",
+    "description": "Lectura/escritura de archivos, try-catch",
+    "content": "<h2>Archivos y Excepciones</h2><h3>Archivos en C:</h3><pre><code>FILE* f = fopen(\"datos.txt\", \"r\");\nchar linea[100];\nwhile (fgets(linea, 100, f))\n    printf(\"%s\", linea);\nfclose(f);</code></pre><h3>Archivos en C++:</h3><pre><code>#include &lt;fstream&gt;\nifstream archivo(\"datos.txt\");\nstring linea;\nwhile (getline(archivo, linea))\n    cout << linea << endl;\narchivo.close();</code></pre><h3>Excepciones (C++):</h3><pre><code>try {\n    int x = 10, y = 0;\n    if (y == 0) throw \"Division por cero\";\n    cout << x / y;\n} catch (const char* msg) {\n    cerr << \"Error: \" << msg << endl;\n}</code></pre>"
+  }
+]

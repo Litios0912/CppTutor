@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>C++ Editor</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        background: #1e1e1e;
+        color: #d4d4d4;
+        font-family: 'Courier New', monospace;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    .toolbar {
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+        background: #2d2d2d;
+        border-bottom: 1px solid #3c3c3c;
+        gap: 8px;
+    }
+    .toolbar select {
+        background: #3c3c3c;
+        color: #d4d4d4;
+        border: 1px solid #555;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-family: monospace;
+        font-size: 13px;
+    }
+    .toolbar button {
+        background: #0e639c;
+        color: white;
+        border: none;
+        padding: 6px 16px;
+        border-radius: 4px;
+        font-size: 13px;
+        cursor: pointer;
+        font-family: sans-serif;
+    }
+    .toolbar button:hover { background: #1177bb; }
+    .toolbar button:active { background: #0a4f7a; }
+    .toolbar .status {
+        flex: 1;
+        text-align: right;
+        font-size: 12px;
+        color: #888;
+        font-family: sans-serif;
+    }
+    .editor-container {
+        flex: 1;
+        display: flex;
+        position: relative;
+    }
+    .line-numbers {
+        background: #1e1e1e;
+        color: #858585;
+        padding: 10px 8px 10px 12px;
+        text-align: right;
+        font-size: 14px;
+        line-height: 1.5;
+        user-select: none;
+        min-width: 40px;
+        overflow: hidden;
+        border-right: 1px solid #2d2d2d;
+    }
+    .code-textarea {
+        flex: 1;
+        background: #1e1e1e;
+        color: #d4d4d4;
+        border: none;
+        outline: none;
+        resize: none;
+        padding: 10px;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        tab-size: 4;
+        white-space: pre;
+        overflow: auto;
+    }
+    .output-panel {
+        background: #1e1e1e;
+        border-top: 1px solid #3c3c3c;
+        max-height: 200px;
+        overflow: auto;
+        padding: 8px 12px;
+        font-size: 13px;
+        line-height: 1.4;
+    }
+    .output-panel .label {
+        color: #888;
+        font-family: sans-serif;
+        font-size: 11px;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+    }
+    .output-panel pre {
+        white-space: pre-wrap;
+        font-family: 'Courier New', monospace;
+        color: #6a9955;
+    }
+    .output-panel pre.error { color: #f48771; }
+    #placeholder {
+        color: #555;
+        padding: 20px;
+        font-family: sans-serif;
+        font-size: 14px;
+    }
+</style>
+</head>
+<body>
+<div class="toolbar">
+    <select id="langSelect">
+        <option value="c">C</option>
+        <option value="cpp" selected>C++</option>
+    </select>
+    <button onclick="doCompile()">Compilar</button>
+    <button onclick="loadExample()">Ejemplo</button>
+    <button onclick="clearCode()">Limpiar</button>
+    <span class="status" id="status">Listo</span>
+</div>
+<div class="editor-container">
+    <div class="line-numbers" id="lineNumbers">1</div>
+    <textarea class="code-textarea" id="codeArea" spellcheck="false"
+        placeholder="Escribe tu codigo aqui..."></textarea>
+</div>
+<div class="output-panel">
+    <div class="label">Salida</div>
+    <pre id="output">Presiona Compilar para ejecutar tu codigo</pre>
+</div>
+
+<script>
+    const codeArea = document.getElementById('codeArea');
+    const lineNumbers = document.getElementById('lineNumbers');
+    const output = document.getElementById('output');
+    const status = document.getElementById('status');
+    const langSelect = document.getElementById('langSelect');
+
+    codeArea.addEventListener('input', updateLineNumbers);
+    codeArea.addEventListener('scroll', syncScroll);
+
+    function updateLineNumbers() {
+        const lines = codeArea.value.split('\n').length;
+        let nums = '';
+        for (let i = 1; i <= Math.max(lines, 1); i++) {
+            nums += i + '\n';
+        }
+        lineNumbers.textContent = nums;
+    }
+
+    function syncScroll() {
+        lineNumbers.scrollTop = codeArea.scrollTop;
+    }
+
+    updateLineNumbers();
+
+    function getCode() {
+        return codeArea.value;
+    }
+
+    function doCompile() {
+        const code = getCode();
+        const lang = langSelect.value;
+        if (!code.trim()) {
+            setOutput('Escribe algun codigo primero', true);
+            return;
+        }
+        status.textContent = 'Compilando...';
+        setOutput('Compilando...', false);
+
+        if (typeof AndroidBridge !== 'undefined') {
+            AndroidBridge.compile(code, lang);
+        } else {
+            setOutput('Modo sin servidor: usa el boton Iniciar Servidor en la app', true);
+            status.textContent = 'Sin servidor';
+        }
+    }
+
+    function showOutput(result) {
+        try {
+            const data = typeof result === 'string' ? JSON.parse(result) : result;
+            if (data.success) {
+                setOutput(data.output, false);
+                status.textContent = 'Compilacion exitosa';
+            } else {
+                setOutput(data.output || data.error || 'Error de compilacion', true);
+                status.textContent = 'Error';
+            }
+        } catch(e) {
+            setOutput(String(result), false);
+            status.textContent = 'Listo';
+        }
+    }
+
+    function setOutput(text, isError) {
+        output.textContent = text;
+        output.className = isError ? 'error' : '';
+    }
+
+    function loadExample() {
+        const lang = langSelect.value;
+        if (lang === 'c') {
+            codeArea.value = `#include <stdio.h>
+
+int main() {
+    printf("Hola Mundo desde C!\\n");
+    int a = 10, b = 20;
+    printf("La suma de %d + %d = %d\\n", a, b, a + b);
+    return 0;
+}`;
+        } else {
+            codeArea.value = `#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::cout << "Bienvenido a C++ Tutor!" << std::endl;
+
+    std::vector<int> nums = {5, 2, 8, 1, 9};
+    std::sort(nums.begin(), nums.end());
+
+    std::cout << "Numeros ordenados: ";
+    for (int n : nums) {
+        std::cout << n << " ";
+    }
+    std::cout << std::endl;
+    return 0;
+}`;
+        }
+        updateLineNumbers();
+        setOutput('Ejemplo cargado. Presiona Compilar', false);
+        status.textContent = 'Ejemplo cargado';
+    }
+
+    function clearCode() {
+        codeArea.value = '';
+        updateLineNumbers();
+        setOutput('Editor limpiado', false);
+        status.textContent = 'Listo';
+    }
+
+    function setCode(code) {
+        codeArea.value = code;
+        updateLineNumbers();
+        setOutput('Ejercicio cargado. Presiona Compilar', false);
+        status.textContent = 'Listo';
+    }
+</script>
+</body>
+</html>

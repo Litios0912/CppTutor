@@ -1,0 +1,82 @@
+[
+  {
+    "question": "Cual es la salida de: printf(\"%d\", 5 + 3 * 2);",
+    "optionA": "16",
+    "optionB": "11",
+    "optionC": "13",
+    "optionD": "10",
+    "correct": "B"
+  },
+  {
+    "question": "Que hace el operador '&' antes de una variable?",
+    "optionA": "Obtiene el valor",
+    "optionB": "Obtiene la direccion de memoria",
+    "optionC": "Niega la variable",
+    "optionD": "Duplica la variable",
+    "correct": "B"
+  },
+  {
+    "question": "Cual es el tamaño de 'int' en C (32 bits)?",
+    "optionA": "2 bytes",
+    "optionB": "4 bytes",
+    "optionC": "8 bytes",
+    "optionD": "1 byte",
+    "correct": "B"
+  },
+  {
+    "question": "Que biblioteca se necesita para printf en C?",
+    "optionA": "<iostream>",
+    "optionB": "<stdio.h>",
+    "optionC": "<stdlib.h>",
+    "optionD": "<string.h>",
+    "correct": "B"
+  },
+  {
+    "question": "En C++, que palabra clave se usa para heredar?",
+    "optionA": "extends",
+    "optionB": "inherits",
+    "optionC": "public",
+    "optionD": "super",
+    "correct": "C"
+  },
+  {
+    "question": "Que es un puntero?",
+    "optionA": "Una variable que almacena un caracter",
+    "optionB": "Una variable que almacena una direccion de memoria",
+    "optionC": "Una funcion especial",
+    "optionD": "Un tipo de bucle",
+    "correct": "B"
+  },
+  {
+    "question": "Cual es la salida de: int x=5; printf(\"%d\", x++);",
+    "optionA": "6",
+    "optionB": "5",
+    "optionC": "4",
+    "optionD": "Error",
+    "correct": "B"
+  },
+  {
+    "question": "Que hace 'delete' en C++?",
+    "optionA": "Elimina un archivo",
+    "optionB": "Libera memoria dinamica",
+    "optionC": "Borra una variable",
+    "optionD": "Termina el programa",
+    "correct": "B"
+  },
+  {
+    "question": "Cual es el bucle que se ejecuta AL MENOS una vez?",
+    "optionA": "for",
+    "optionB": "while",
+    "optionC": "do-while",
+    "optionD": "if",
+    "correct": "C"
+  },
+  {
+    "question": "Que contiene la STL de C++?",
+    "optionA": "Solo strings",
+    "optionB": "Contenedores, algoritmos e iteradores",
+    "optionC": "Solo entrada/salida",
+    "optionD": "El compilador",
+    "correct": "B"
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "Hola Mundo",
+    "description": "Escribe un programa que imprima 'Hola, Mundo!' en la consola.",
+    "starterCode": "#include <iostream>\n\nint main() {\n    std::cout << \"Hola, Mundo!\" << std::endl;\n    return 0;\n}"
+  },
+  {
+    "id": 2,
+    "title": "Calculadora de Suma",
+    "description": "Pide dos numeros al usuario y muestra su suma.",
+    "starterCode": "#include <iostream>\n\nint main() {\n    int a, b;\n    std::cout << \"Ingresa dos numeros: \";\n    std::cin >> a >> b;\n    std::cout << \"Suma: \" << a + b << std::endl;\n    return 0;\n}"
+  },
+  {
+    "id": 3,
+    "title": "Par o Impar",
+    "description": "Pide un numero y determina si es par o impar.",
+    "starterCode": "#include <iostream>\n\nint main() {\n    int n;\n    std::cout << \"Ingresa un numero: \";\n    std::cin >> n;\n    if (n % 2 == 0)\n        std::cout << n << \" es par\" << std::endl;\n    else\n        std::cout << n << \" es impar\" << std::endl;\n    return 0;\n}"
+  },
+  {
+    "id": 4,
+    "title": "Factorial",
+    "description": "Calcula el factorial de un numero ingresado por el usuario.",
+    "starterCode": "#include <iostream>\n\nint main() {\n    int n;\n    long long fact = 1;\n    std::cout << \"Ingresa un numero: \";\n    std::cin >> n;\n    for (int i = 1; i <= n; i++)\n        fact *= i;\n    std::cout << \"Factorial: \" << fact << std::endl;\n    return 0;\n}"
+  },
+  {
+    "id": 5,
+    "title": "Fibonacci",
+    "description": "Muestra los primeros N numeros de la serie Fibonacci.",
+    "starterCode": "#include <iostream>\n\nint main() {\n    int n, a = 0, b = 1, c;\n    std::cout << \"Cuantos numeros Fibonacci? \";\n    std::cin >> n;\n    for (int i = 0; i < n; i++) {\n        std::cout << a << \" \";\n        c = a + b;\n        a = b;\n        b = c;\n    }\n    std::cout << std::endl;\n    return 0;\n}"
+  },
+  {
+    "id": 6,
+    "title": "Calculadora Simple",
+    "description": "Crea una calculadora que suma, resta, multiplica y divide dos numeros.",
+    "starterCode": "#include <iostream>\n\nint main() {\n    double a, b;\n    char op;\n    std::cout << \"Ingresa operacion (ej: 3 + 5): \";\n    std::cin >> a >> op >> b;\n    switch(op) {\n        case '+': std::cout << a + b; break;\n        case '-': std::cout << a - b; break;\n        case '*': std::cout << a * b; break;\n        case '/': std::cout << a / b; break;\n        default: std::cout << \"Operador invalido\";\n    }\n    std::cout << std::endl;\n    return 0;\n}"
+  },
+  {
+    "id": 7,
+    "title": "Tabla de Multiplicar",
+    "description": "Muestra la tabla de multiplicar de un numero ingresado.",
+    "starterCode": "#include <iostream>\n\nint main() {\n    int n;\n    std::cout << \"Que tabla quieres ver? \";\n    std::cin >> n;\n    for (int i = 1; i <= 10; i++)\n        std::cout << n << \" x \" << i << \" = \" << n * i << std::endl;\n    return 0;\n}"
+  },
+  {
+    "id": 8,
+    "title": "Numero Primo",
+    "description": "Determina si un numero ingresado es primo o no.",
+    "starterCode": "#include <iostream>\n\nint main() {\n    int n;\n    bool primo = true;\n    std::cout << \"Ingresa un numero: \";\n    std::cin >> n;\n    for (int i = 2; i * i <= n; i++) {\n        if (n % i == 0) { primo = false; break; }\n    }\n    if (primo && n > 1)\n        std::cout << n << \" es primo\" << std::endl;\n    else\n        std::cout << n << \" no es primo\" << std::endl;\n    return 0;\n}"
+  },
+  {
+    "id": 9,
+    "title": "Invertir Numero",
+    "description": "Invierte los digitos de un numero entero.",
+    "starterCode": "#include <iostream>\n\nint main() {\n    int n, invertido = 0;\n    std::cout << \"Ingresa un numero: \";\n    std::cin >> n;\n    while (n > 0) {\n        invertido = invertido * 10 + n % 10;\n        n /= 10;\n    }\n    std::cout << \"Invertido: \" << invertido << std::endl;\n    return 0;\n}"
+  },
+  {
+    "id": 10,
+    "title": "Palindromo",
+    "description": "Verifica si una palabra o numero es palindromo.",
+    "starterCode": "#include <iostream>\n#include <string>\n\nint main() {\n    std::string s;\n    std::cout << \"Ingresa una palabra: \";\n    std::cin >> s;\n    bool palindromo = true;\n    int n = s.length();\n    for (int i = 0; i < n / 2; i++) {\n        if (s[i] != s[n - 1 - i]) { palindromo = false; break; }\n    }\n    if (palindromo)\n        std::cout << \"Es palindromo\" << std::endl;\n    else\n        std::cout << \"No es palindromo\" << std::endl;\n    return 0;\n}"
+  }
+]
