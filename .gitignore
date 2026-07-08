@@ -1,0 +1,10 @@
+build/*.apk
+build/*.idsig
+build/debug.keystore
+build_test/*.apk
+build_test/*.idsig
+*.class
+local.properties
+.gradle/
+.idea/
+*.iml
